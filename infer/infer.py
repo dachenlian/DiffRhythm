@@ -121,15 +121,16 @@ if __name__ == "__main__":
         "--output-file-name",
         type=str,
         default="output.wav",
-        help="name of output file for generated song"
+        help="name of output file for generated song",
+    )
     args = parser.parse_args()
 
-    assert (
-        args.ref_prompt or args.ref_audio_path
-    ), "either ref_prompt or ref_audio_path should be provided"
-    assert not (
-        args.ref_prompt and args.ref_audio_path
-    ), "only one of them should be provided"
+    assert args.ref_prompt or args.ref_audio_path, (
+        "either ref_prompt or ref_audio_path should be provided"
+    )
+    assert not (args.ref_prompt and args.ref_audio_path), (
+        "only one of them should be provided"
+    )
 
     device = "cpu"
     if torch.cuda.is_available():
@@ -146,7 +147,7 @@ if __name__ == "__main__":
     cfm, tokenizer, muq, vae = prepare_model(max_frames, device, repo_id=args.repo_id)
 
     if args.lrc_path:
-        with open(args.lrc_path, "r", encoding='utf-8') as f:
+        with open(args.lrc_path, "r", encoding="utf-8") as f:
             lrc = f.read()
     else:
         lrc = ""
