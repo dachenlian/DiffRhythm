@@ -98,7 +98,7 @@ class PolyDataset(Dataset):
 
         # convert data to torch LongTensors
         batch_data = torch.tensor(batch_data, dtype=torch.long)
-        batch_label_starts = torch.tensor(batch_label_starts, dtype=torch.long)
+        batch_label_starts = torch.tensor(np.array(batch_label_starts), dtype=torch.long)
         batch_labels = torch.tensor(batch_labels, dtype=torch.long)
         batch_pmasks = torch.tensor(batch_pmasks, dtype=torch.long)
         return [batch_data, batch_label_starts, batch_labels, batch_pmasks, ori_sents]
