@@ -109,7 +109,7 @@ if __name__ == "__main__":
         help="length of generated song",
     )  # length of target song
     parser.add_argument(
-        "--repo_id", type=str, default="ASLP-lab/DiffRhythm-base", help="target model"
+        "--repo_id", type=str, default="ASLP-lab/DiffRhythm-full", help="target model"
     )
     parser.add_argument(
         "--output-dir",
