@@ -115,8 +115,13 @@ if __name__ == "__main__":
         "--output-dir",
         type=str,
         default="infer/example/output",
-        help="output directory fo generated song",
+        help="output directory for generated song",
     )  # output directory of target song
+    parser.add_argument(
+        "--output-file-name",
+        type=str,
+        default="output.wav",
+        help="name of output file for generated song"
     args = parser.parse_args()
 
     assert (
@@ -172,7 +177,8 @@ if __name__ == "__main__":
     print(f"inference cost {e_t:.2f} seconds")
 
     output_dir = args.output_dir
+    output_file_name = args.output_file_name
     os.makedirs(output_dir, exist_ok=True)
 
-    output_path = os.path.join(output_dir, "output.wav")
+    output_path = os.path.join(output_dir, output_file_name)
     torchaudio.save(output_path, generated_song, sample_rate=44100)
