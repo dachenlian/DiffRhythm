@@ -22,9 +22,7 @@ import torch
 import torchaudio
 from einops import rearrange
 
-print("Current working directory:", os.getcwd())
-
-from infer_utils import (
+from .infer_utils import (
     decode_audio,
     get_lrc_token,
     get_negative_style_prompt,
@@ -32,6 +30,8 @@ from infer_utils import (
     get_style_prompt,
     prepare_model,
 )
+
+print("Current working directory:", os.getcwd())
 
 
 def inference(
@@ -143,6 +143,8 @@ if __name__ == "__main__":
         max_frames = 2048
     elif audio_length == 285:  # current not available
         max_frames = 6144
+    else:
+        raise ValueError("audio_length should be 95 or 285")
 
     cfm, tokenizer, muq, vae = prepare_model(max_frames, device, repo_id=args.repo_id)
 
