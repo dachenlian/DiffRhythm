@@ -205,7 +205,8 @@ printf "%b" "  Output File:    $OUTPUT_FILE_NAME\n"
 printf "%b" "  Chunked:        $CHUNKED\n"
 
 # --- Construct Python Command ---
-PYTHON_CMD=(uv run infer/infer.py) # Use array for safety with paths/args
+# PYTHON_CMD=(uv run python infer/infer.py) # Use array for safety with paths/args
+PYTHON_CMD=(uv run python -m diffrhythm.infer.infer) # Use array for safety with paths/args
 
 if [ -n "$LRC_PATH" ]; then
     PYTHON_CMD+=(--lrc-path "$LRC_PATH")
