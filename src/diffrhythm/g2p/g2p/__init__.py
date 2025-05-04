@@ -3,7 +3,7 @@
 # This source code is licensed under the MIT license found in the
 # LICENSE file in the root directory of this source tree.
 
-from g2p.g2p import cleaners
+from . import cleaners
 from tokenizers import Tokenizer
 from g2p.g2p.text_tokenizers import TextTokenizer
 from thirdparty.LangSegment import LangSegment
