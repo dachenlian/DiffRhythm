@@ -37,8 +37,8 @@ from torch.utils.data import DataLoader
 
 from ema_pytorch import EMA
 
-from model import CFM
-from model.utils import exists, default
+from .model import CFM
+from .utils import exists, default
 
 class Trainer:
     def __init__(
