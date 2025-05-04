@@ -3,13 +3,14 @@
 # This source code is licensed under the MIT license found in the
 # LICENSE file in the root directory of this source tree.
 
+from importlib.resources import files
 import re
 import jieba
 import cn2an
 from pypinyin import lazy_pinyin, BOPOMOFO
 from typing import List
-from g2p.g2p.chinese_model_g2p import BertPolyPredict
-from g2p.utils.front_utils import *
+from .chinese_model_g2p import BertPolyPredict
+from ..utils.front_utils import *
 import os
 
 # from g2pw import G2PWConverter
@@ -19,11 +20,9 @@ import os
 BLANK_LEVEL = 0
 
 # conv = G2PWConverter(style='pinyin', enable_non_tradional_chinese=True)
-resource_path = r"./g2p"
-poly_all_class_path = os.path.join(
-    resource_path, "sources", "g2p_chinese_model", "polychar.txt"
-)
-if not os.path.exists(poly_all_class_path):
+resource_path = files("diffrhythm.g2p.sources")
+poly_all_class_path = resource_path.joinpath("g2p_chinese_model").joinpath("polychar.txt")
+if not poly_all_class_path.exists():
     print(
         "Incorrect path for polyphonic character class dictionary: {}, please check...".format(
             poly_all_class_path
@@ -33,8 +32,8 @@ if not os.path.exists(poly_all_class_path):
 poly_dict = generate_poly_lexicon(poly_all_class_path)
 
 # Set up G2PW model parameters
-g2pw_poly_model_path = os.path.join(resource_path, "sources", "g2p_chinese_model")
-if not os.path.exists(g2pw_poly_model_path):
+g2pw_poly_model_path = resource_path.joinpath("g2p_chinese_model")
+if not g2pw_poly_model_path.exists():
     print(
         "Incorrect path for g2pw polyphonic character model: {}, please check...".format(
             g2pw_poly_model_path
@@ -42,10 +41,8 @@ if not os.path.exists(g2pw_poly_model_path):
     )
     exit()
 
-json_file_path = os.path.join(
-    resource_path, "sources", "g2p_chinese_model", "polydict.json"
-)
-if not os.path.exists(json_file_path):
+json_file_path = resource_path.joinpath("g2p_chinese_model").joinpath("polydict.json")
+if not json_file_path.exists():
     print(
         "Incorrect path for g2pw id to pinyin dictionary: {}, please check...".format(
             json_file_path
@@ -53,10 +50,8 @@ if not os.path.exists(json_file_path):
     )
     exit()
 
-jsonr_file_path = os.path.join(
-    resource_path, "sources", "g2p_chinese_model", "polydict_r.json"
-)
-if not os.path.exists(jsonr_file_path):
+jsonr_file_path = resource_path.joinpath("g2p_chinese_model", "polydict_r.json")
+if not jsonr_file_path.exists():
     print(
         "Incorrect path for g2pw pinyin to id dictionary: {}, please check...".format(
             jsonr_file_path
